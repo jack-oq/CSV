@@ -1,18 +1,10 @@
 #sitka5.py
 
-# Automatic Indexes: We hard coded the indexes corresponding to the TMIN and TMAX
-# columns. Use the header row to determine the indexes for these values, so your program can work
-# for Sitka or Death Valley. Use the station name to automatically generate an appropriate title
-# for your graph as well.
+# Automatic Indexes: We hard coded the indexes corresponding to the TMIN and TMAX columns. 
+# Use the header row to determine the indexes for these values, so your program can work
+# for Sitka or Death Valley. 
 
-# create 2 subplot graphs in one visualization so you can see both graphs to compare side by side.
-
-# Matplotlib's pyplot API has a convenience function called subplots() which acts as a
-# utility wrapper and helps in creating common layouts of subplots, including the
-# enclosing figure object, in a single call.
-
-#dynamic title from file
-
+#auto format fonts to not get cut off!
 
 import csv
 from datetime import datetime
@@ -20,6 +12,23 @@ import matplotlib.pyplot as plt
 
 fig = plt.figure()
 
+'''
+def auto_index_max():
+    for row in infile:
+        for position, element in row:
+            if element == 'TMAX':
+                max_temp_index = position
+                return max_temp_index
+
+def auto_index_min():
+    for row in infile:
+        for position, element in row:
+            if element == 'TMIN':
+                min_temp_index = position
+                return min_temp_index
+                
+    
+'''
 #Sitka Airport Upper Half
 
 infile = open('sitka_weather_2018_simple.csv', 'r')
@@ -27,6 +36,20 @@ infile = open('sitka_weather_2018_simple.csv', 'r')
 csv_file = csv.reader(infile)
 
 header_row = next(csv_file)
+
+tmax_position = 0
+for element in header_row:
+    if element == 'TMAX':
+        break
+    else:
+        tmax_position += 1
+
+tmin_position = 0
+for element in header_row:
+    if element == 'TMIN':
+        break
+    else:
+        tmin_position += 1
 
 for index, col_header in enumerate(header_row):
     print(index, col_header)
@@ -39,11 +62,12 @@ some_date = datetime.strptime('2018-07-01', '%Y-%m-%d')
 print(type(some_date))
 
 for row in csv_file:
-    highs.append(int(row[5]))
-    lows.append(int(row[6]))
+    highs.append(int(row[tmax_position]))
+    lows.append(int(row[tmin_position]))
     some_date = datetime.strptime(row[2], '%Y-%m-%d')
     dates.append(some_date)
     location1 = row[1]
+
 
 print(highs[:5])
 print(dates[:5])
@@ -69,6 +93,20 @@ csv_file = csv.reader(infile)
 
 header_row = next(csv_file)
 
+tmax_position = 0
+for element in header_row:
+    if element == 'TMAX':
+        break
+    else:
+        tmax_position += 1
+
+tmin_position = 0
+for element in header_row:
+    if element == 'TMIN':
+        break
+    else:
+        tmin_position += 1
+
 for index, col_header in enumerate(header_row):
     print(index, col_header)
 
@@ -79,8 +117,6 @@ lows = []
 some_date = datetime.strptime('2018-07-01', '%Y-%m-%d')
 print(type(some_date))
 
-
-
 for row in csv_file:
     try:
         some_date = datetime.strptime(row[2], '%Y-%m-%d')
@@ -90,10 +126,9 @@ for row in csv_file:
     except ValueError:
         print(f"Missing data for {some_date}")
     else:
-        highs.append(int(row[4]))
-        lows.append(int(row[5]))
+        highs.append(int(row[tmax_position]))
+        lows.append(int(row[tmin_position]))
         dates.append(some_date)
-
 
 print(highs[:5])
 print(dates[:5])
