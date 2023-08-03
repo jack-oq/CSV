@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-infile = open('sitka_weather_2018_simple.csv', 'r')
+infile = open('death_valley_2018_simple.csv', 'r')
 
 csv_file = csv.reader(infile)
 
@@ -20,8 +20,8 @@ print(type(some_date))
 
 
 for row in csv_file:
-    highs.append(int(row[5]))
-    lows.append(int(row[6]))
+    highs.append(int(row[4]))
+    lows.append(int(row[5]))
     some_date = datetime.strptime(row[2], '%Y-%m-%d')
     dates.append(some_date)
 
