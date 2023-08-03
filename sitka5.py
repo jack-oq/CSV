@@ -43,6 +43,7 @@ for row in csv_file:
     lows.append(int(row[6]))
     some_date = datetime.strptime(row[2], '%Y-%m-%d')
     dates.append(some_date)
+    location1 = row[1]
 
 print(highs[:5])
 print(dates[:5])
@@ -54,10 +55,8 @@ plt.plot(dates, lows, c='blue', alpha=0.5)
 
 plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
 
-plt.title("Daily Low and High Temperatures, July 2018", fontsize=16)
-plt.xlabel("Dates", fontsize=16)
-plt.ylabel("Temps (F)", fontsize=16)
-plt.tick_params(axis='both', which='major', labelsize=16)
+plt.title(location1, fontsize=10)
+plt.tick_params(axis='both', which='major', labelsize=10)
 
 fig.autofmt_xdate()
 
@@ -87,6 +86,7 @@ for row in csv_file:
         some_date = datetime.strptime(row[2], '%Y-%m-%d')
         high = int(row[4])
         low = int(row[5])
+        location2 = row[1]
     except ValueError:
         print(f"Missing data for {some_date}")
     else:
@@ -105,12 +105,12 @@ plt.plot(dates, lows, c='blue', alpha=0.5)
 
 plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
 
-plt.title("Daily Low and High Temperatures, July 2018", fontsize=16)
-plt.xlabel("Dates", fontsize=16)
-plt.ylabel("Temps (F)", fontsize=16)
-plt.tick_params(axis='both', which='major', labelsize=16)
+plt.title(location2, fontsize=10)
+plt.tick_params(axis='both', which='major', labelsize=10)
 
 fig.autofmt_xdate()
+
+plt.suptitle(f"Temperature comparison between {location1} and {location2}")
 
 plt.show()
 
