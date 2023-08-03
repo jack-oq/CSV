@@ -1,34 +1,9 @@
-#sitka5.py
-
-# Automatic Indexes: We hard coded the indexes corresponding to the TMIN and TMAX columns. 
-# Use the header row to determine the indexes for these values, so your program can work
-# for Sitka or Death Valley. 
-
-#auto format fonts to not get cut off!
-
 import csv
 from datetime import datetime
 import matplotlib.pyplot as plt
 
 fig = plt.figure()
 
-'''
-def auto_index_max():
-    for row in infile:
-        for position, element in row:
-            if element == 'TMAX':
-                max_temp_index = position
-                return max_temp_index
-
-def auto_index_min():
-    for row in infile:
-        for position, element in row:
-            if element == 'TMIN':
-                min_temp_index = position
-                return min_temp_index
-                
-    
-'''
 #Sitka Airport Upper Half
 
 infile = open('sitka_weather_2018_simple.csv', 'r')
@@ -67,7 +42,6 @@ for row in csv_file:
     some_date = datetime.strptime(row[2], '%Y-%m-%d')
     dates.append(some_date)
     location1 = row[1]
-
 
 print(highs[:5])
 print(dates[:5])
