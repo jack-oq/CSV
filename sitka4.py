@@ -20,10 +20,16 @@ print(type(some_date))
 
 
 for row in csv_file:
-    highs.append(int(row[4]))
-    lows.append(int(row[5]))
-    some_date = datetime.strptime(row[2], '%Y-%m-%d')
-    dates.append(some_date)
+    try:
+        some_date = datetime.strptime(row[2], '%Y-%m-%d')
+        high = int(row[4])
+        low = int(row[5])
+    except ValueError:
+        print(f"Missing data for {some_date}")
+    else:
+        highs.append(int(row[4]))
+        lows.append(int(row[5]))
+        dates.append(some_date)
 
 
 print(highs[:5])
