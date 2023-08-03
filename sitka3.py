@@ -47,3 +47,17 @@ fig.autofmt_xdate()
 
 plt.show()
 
+#in class instruction for homework:
+'''
+plt.subplot(2,1,1)
+plt.plot(dates,highs,c='red')
+plt.title("Highs")
+
+plt.subplot(2,1,2)
+plt.plot(dates,lows,c='blue')
+plt.title("Lows")
+
+plt.suptitle("Highs ans Lows for Sitka Alaska")
+
+plt.show()
+'''
